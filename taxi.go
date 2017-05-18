@@ -29,7 +29,7 @@ func taxiCount(distance float64) string {
 	return fmt.Sprintf("%d\n" , dollars)
 }
 
-func danielAns(testData string) string {
+func roseAns(testData string) string {
 	myAns := ""
 	problemSet := split(testData) // 把題目拆成一個 slice, 每個元素都是一個題目(int)
 	for _, distance := range(problemSet) {
@@ -43,7 +43,7 @@ func main() {
 	testData := "0.9\n1.6\n2.2\n3.5\n4.8\n"
 	correctAns := "75\n80\n90\n115\n145\n"
 
-	myAns := danielAns(testData)
+	myAns := roseAns(testData)
 	fmt.Printf("myAns:\n%s", myAns)
 	if myAns == correctAns {
 		fmt.Println("PASS")
