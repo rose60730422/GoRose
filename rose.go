@@ -3,5 +3,8 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("hello, world!")
+	str := "hello, world!"
+	for tmpStr := str; len(tmpStr) > 0; tmpStr = tmpStr[1:] {
+		fmt.Println(tmpStr)
+	}
 }
