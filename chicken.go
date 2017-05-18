@@ -6,6 +6,12 @@ import (
 	"strconv"
 )
 
+func count(legs, amount int) (amountChicken, amountRabbit int) {
+	amountChicken = (4 * amount - legs) / 2
+	amountRabbit = amount - amountChicken
+	return amountChicken, amountRabbit
+}
+
 func danielAns(input string) string {
 	var inputData = strings.Fields(input)
 	var myAnswer string
@@ -35,8 +41,11 @@ func danielAns(input string) string {
 			
 
 			// fmt.Printf("legs:%d, amount:%d\n", legs, amount)
-			amountChicken = (4 * amount - legs) / 2
-			amountRabbit = amount - amountChicken
+			
+			// amountChicken = (4 * amount - legs) / 2
+			// amountRabbit = amount - amountChicken
+
+			amountChicken, amountRabbit = count(legs, amount)
 			// fmt.Printf("chichen: %d, rabbit: %d\n", amountChicken, amountRabbit)
 			myAnswer = myAnswer  + strconv.Itoa(amountChicken) + " " + strconv.Itoa(amountRabbit) + "\n"		
 		}
