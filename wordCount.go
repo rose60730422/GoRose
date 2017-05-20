@@ -6,11 +6,23 @@ import (
 	"reflect"
 )
 
-func WordCount(s string) map[string]int {
+func roseWordCount(s string) map[string]int {
 	s_split := strings.Fields(s)
 	ans := make(map[string]int)
+	for _, v := range(s_split) {
+		ans[v]++
+	}
+	return ans
+}
+
+func WordCount(s string) map[string]int {
+	s_split := strings.Fields(s)
+	// fmt.Println(s_split)
+	ans := make(map[string]int)
 	for _,v := range(s_split) {
-	ans[v]++
+		// fmt.Println(v)
+		ans[v]++
+		// fmt.Println(ans)
 	}
 	return ans
 }
@@ -28,5 +40,6 @@ func myTest(myWC func(s string) map[string]int) {
 }
 
 func main() {
-	myTest(WordCount)
+	//myTest(WordCount)
+	myTest(roseWordCount)
 }
