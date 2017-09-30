@@ -98,7 +98,8 @@ func matrixScale(number int, inputMatrix MyMatrix) MyMatrix {
 }
 
 func (mtx *MyMatrix) show() {
-	for rowIndex:= range mtx.matrix {
+	//for rowIndex:= range mtx.matrix {
+	for rowIndex := 0; rowIndex < len(mtx.matrix); rowIndex++ {
 		fmt.Println(mtx.matrix[rowIndex])
 	}
 }
