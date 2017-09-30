@@ -11,20 +11,25 @@ type MyMatrix struct {
 }
 
 func matrixAdd(matrix1, matrix2 MyMatrix) MyMatrix {
+	// 1. 讀取 matrix1, matrix2 的長寬
 	r := matrix1.numberRow
 	c := matrix1.numberColumn
-	roseMatrix := make([][]int, r)
+
+	// 2. 宣告用來回傳的 MyMatrix
+	roseAns := MyMatrix{}
+	roseAns.numberColumn = c
+	roseAns.numberColumn = r
+
+	// 3. 計算 MyMatrix 中的 matrix
+	roseAns.matrix = make([][]int, r)
 	for i := 0 ; i < r ; i++ {
-		roseMatrix[i] = make([]int , c)
+		roseAns.matrix[i] = make([]int , c)
 		for j := 0 ; j < c ; j++ {
-			roseMatrix[i][j] = matrix1.matrix[i][j] + matrix2.matrix[i][j] 
+			roseAns.matrix[i][j] = matrix1.matrix[i][j] + matrix2.matrix[i][j] 
 		}
 	}
-	var roseAns = MyMatrix {
-		r,
-		c,
-		roseMatrix,
-	}
+
+	// 4. 回傳
 	return roseAns
 }
 
@@ -32,20 +37,20 @@ func matrixDot (matrix1, matrix2 MyMatrix) MyMatrix {
 	r := matrix1.numberRow
 	c := matrix2.numberColumn
 
-	ansMatrixDot := make([][]int, r)
-	for index := range ansMatrixDot {
-		ansMatrixDot[index] = make([]int, c)
+	roseAnsMatrix := MyMatrix{}
+	roseAnsMatrix.numberColumn = c
+	roseAnsMatrix.numberRow = r
+	roseAnsMatrix.matrix = make([][]int, r)
+
+	for index := range roseAnsMatrix.matrix {
+		roseAnsMatrix.matrix[index] = make([]int, c)
 	}
 
 	for i := 0 ; i < r ; i++ {
 		for j := 0 ; j < c ; j++ {
-			ansMatrixDot[i][j] = dotIJ(i , j , matrix1 , matrix2)
+			roseAnsMatrix.matrix[i][j] = dotIJ(i , j , matrix1 , matrix2)
 		}
 	}
-	var roseAnsMatrix MyMatrix
-	roseAnsMatrix.numberRow = r
-	roseAnsMatrix.numberColumn = c
-	roseAnsMatrix.matrix = ansMatrixDot
 	return roseAnsMatrix
 }
 
@@ -57,35 +62,57 @@ func dotIJ (i int, j int, matrix1 MyMatrix, matrix2 MyMatrix) int {
 	return sum 
 }
 
+func transposeMatrix (inputMatrix MyMatrix) MyMatrix {
+	r := inputMatrix.numberRow
+	c := inputMatrix.numberColumn
 
+	transpose := MyMatrix{}
+	transpose.numberColumn = r
+	transpose.numberRow = c
+	transpose.matrix = make([][]int , c)
+	for index := range transpose.matrix {
+		transpose.matrix[index] = make([]int , r)
+	}
+
+	for i := 0 ; i < c ; i++ {
+		for j := 0 ; j < r ; j++{
+			transpose.matrix[i][j] = inputMatrix.matrix[j][i]
+		}
+	}
+	return transpose
+}
 
 
 
 
 
 func matrixScale(number int, inputMatrix MyMatrix) MyMatrix {
-	length := inputMatrix.numberRow
-	width := inputMatrix.numberColumn
-
-	ansMatrix := make([][]int, length)
+	// 1.
+	r := inputMatrix.numberRow
+	c := inputMatrix.numberColumn
+	
+	//2.
+	ansMatrix := MyMatrix{}
+	ansMatrix.numberColumn = c
+	ansMatrix.numberRow = r
+	ansMatrix.matrix = make([][]int, r)
 	// fmt.Println(ansMatrix)
-	for index := range ansMatrix {
-		ansMatrix[index] = make([]int, width)
+
+	// 3.
+	for index := range ansMatrix.matrix {
+		ansMatrix.matrix[index] = make([]int, c)
 		// fmt.Println(ansMatrix)
 	}
 
 	// originalMatrix := inputMatrix.matrix
-	for i := 0 ; i < length ; i++ {
-		for j := 0 ; j < width ; j++ {
-			ansMatrix[i][j] = number * inputMatrix.matrix[i][j] 
+
+	// 4.
+	for i := 0 ; i < r ; i++ {
+		for j := 0 ; j < c ; j++ {
+			ansMatrix.matrix[i][j] = number * inputMatrix.matrix[i][j] 
 		}
 	}
-
-	var ansMyMatrix MyMatrix
-	ansMyMatrix.numberColumn = width
-	ansMyMatrix.numberRow = length
-	ansMyMatrix.matrix = ansMatrix
-	return ansMyMatrix
+	return ansMatrix
 	// ansMatrix[0][1] = number * matrix[0][1]
 	// ansMatrix[0][0] = number * matrix[0][0]
 	// ansMatrix[0][2] = number * matrix[0][2]
@@ -154,4 +181,9 @@ func main() {
 
 	roseMatrix = matrixDot(myMatrix3, myMatrix4)
 	roseMatrix.show()
+
+	fmt.Println("transpose")
+	transposeMatrix := transposeMatrix(myMatrix4)
+	transposeMatrix.show()
+
 }

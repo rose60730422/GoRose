@@ -8,5 +8,9 @@ func main() {
 	// for tmpStr := str; len(tmpStr) > 0; tmpStr = tmpStr[1:] {
 	// 	fmt.Println(tmpStr)
 	// }
-	MyApp.Foo()
+	// MyApp.Foo()
+	str := "hello, world!"
+	for tmpStr := str[:]; len(tmpStr) > 0; tmpStr = tmpStr[1:] {
+		fmt.Println(tmpStr)
+	}
 }
